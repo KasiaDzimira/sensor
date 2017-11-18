@@ -1,0 +1,16 @@
+{
+  "name": "sensor-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --timeout 10000 --recursive",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^4.6.2",
+    "ds18x20": "^0.2.0"
+  }
+}
