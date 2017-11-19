@@ -4,10 +4,10 @@ const firebaseConfig = require('../../config/firebase.config');
 firebase.initializeApp(firebaseConfig);
 
 class FirebaseActions {
-    pushData(item) {
-        const itemsRef = firebase.database().ref('sensors');
+    pushData(data, sensorId) {
+        const itemsRef = firebase.database().ref().child('sensors');
 
-        itemsRef.push(item);
+        itemsRef.child(sensorId).child(Date.now()).set({ value: data });
     }
 }
 

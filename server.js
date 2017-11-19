@@ -1,11 +1,16 @@
 const sensor = require('ds18x20');
 const FirebaseActions = require('./services/firebase-actions/actions');
-const TemperatureSensorDataTransformer = require('./services/sensor-data/temperature-sensor-data-transformer');
 
 function readData() {
-    sensor.getAll(function (err, tempObj) {
-        console.log(tempObj);
-    });
+    var listOfDeviceIds = sensor.list();
+
+    if (listOfDeviceIds.length === 0) {
+        console.log('No sensor found!');
+    } else {
+        for (var i = 0, len = listOfDeviceIds.length; i < len; i++) {
+            FirebaseActions.pushData(sensor.get(listOfDeviceIds[i]), listOfDeviceIds[i]);
+        }
+    }
 }
 
-setInterval(readData, 1000);
+setInterval(readData, 60000);
